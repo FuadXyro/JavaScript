@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const letters = 'NEXON AI'.split('');
+  const letters = 'ZENITH - AI'.split('');
 
   const handleGetStarted = () => {
     navigate('/chat');

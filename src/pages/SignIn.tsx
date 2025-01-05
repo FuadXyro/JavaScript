@@ -67,7 +67,7 @@ const SignIn: React.FC = () => {
               </Link>
               <div className="flex items-center space-x-3">
                 <div className="h-3 w-3 bg-blue-500 rounded-full animate-pulse" />
-                <h1 className="text-xl font-bold text-white">NEXON AI Sign In</h1>
+                <h1 className="text-xl font-bold text-white">ZENITH - AI Sign In</h1>
               </div>
             </div>
           </div>

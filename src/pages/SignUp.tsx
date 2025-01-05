@@ -75,7 +75,7 @@ const SignUp: React.FC = () => {
               </Link>
               <div className="flex items-center space-x-3">
                 <div className="h-3 w-3 bg-green-500 rounded-full animate-pulse" />
-                <h1 className="text-xl font-bold text-white">NEXON AI Sign Up</h1>
+                <h1 className="text-xl font-bold text-white">ZENITH - AI Sign Up</h1>
               </div>
             </div>
           </div>

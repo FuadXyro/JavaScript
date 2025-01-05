@@ -7,12 +7,12 @@ export default function About() {
         <div className="bg-gray-800/50 backdrop-blur-lg rounded-lg p-8 shadow-lg">
           <div className="flex items-center gap-3 mb-6">
             <InformationCircleIcon className="h-8 w-8 text-blue-400" />
-            <h1 className="text-3xl font-bold text-white">About NEXON</h1>
+            <h1 className="text-3xl font-bold text-white">About Zenith</h1>
           </div>
 
           <div className="space-y-6 text-gray-300">
             <p>
-              NEXON is a cutting-edge AI platform that combines powerful language
+              ZENITH is a cutting-edge AI platform that combines powerful language
               processing and image generation capabilities. Our mission is to make
               advanced AI technology accessible and user-friendly.
             </p>
@@ -48,7 +48,7 @@ export default function About() {
 
             <div className="pt-4 border-t border-gray-700">
               <p className="text-sm text-gray-400">
-                2025 NEXON. All rights reserved. For more information about our
+                2025 ZENITH. All rights reserved. For more information about our
                 terms of service and privacy policy, please visit our documentation.
               </p>
             </div>

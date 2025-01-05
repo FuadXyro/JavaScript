@@ -83,7 +83,7 @@ const ImageGeneration: React.FC = () => {
               </Link>
               <div className="flex items-center space-x-3">
                 <div className="h-3 w-3 bg-purple-500 rounded-full animate-pulse" />
-                <h1 className="text-xl font-bold text-white">NEXON Image Generation</h1>
+                <h1 className="text-xl font-bold text-white">Zenith Image Generation</h1>
               </div>
             </div>
           </div>
@@ -94,9 +94,9 @@ const ImageGeneration: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">NEXON AI Image Creation</h2>
+            <h2 className="text-3xl font-bold text-white mb-4">ZENITH AI Image Creation</h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Transform your ideas into stunning visuals using NEXON's advanced AI image generation technology.
+              Transform your ideas into stunning visuals using ZENITH advanced AI image generation technology.
               Simply describe what you want to see, and watch as our AI brings your vision to life.
             </p>
           </div>

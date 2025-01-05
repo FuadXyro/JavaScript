@@ -105,7 +105,7 @@ const Generation: React.FC = () => {
               </Link>
               <div className="flex items-center space-x-3">
                 <div className="h-3 w-3 bg-blue-500 rounded-full animate-pulse" />
-                <h1 className="text-xl font-bold text-white">NEXON AI Hub</h1>
+                <h1 className="text-xl font-bold text-white">ZENITH - AI Hub</h1>
               </div>
             </div>
 
@@ -116,7 +116,7 @@ const Generation: React.FC = () => {
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <ChatBubbleLeftIcon className="h-5 w-5 mr-2" />
-                NEXON Chat
+                ZENITH - CHAT
               </Link>
             </div>
           </div>
@@ -126,10 +126,10 @@ const Generation: React.FC = () => {
       <div className="flex-1 container mx-auto max-w-5xl p-4 overflow-y-auto custom-scrollbar">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">NEXON AI Generation Hub</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Zenith Ai Generation Hub</h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Explore our suite of AI-powered generation tools. Create images, code, text, and more with
-            NEXON's state-of-the-art artificial intelligence.
+            Zenith's state-of-the-art artificial intelligence.
           </p>
         </div>
 

@@ -166,7 +166,7 @@ export default function Settings() {
           {/* Appearance Settings */}
           <SettingCard
             title="Appearance"
-            description="Customize how NEXON AI looks on your device"
+            description="Customize how ZENITH - AI looks on your device"
             icon={Cog6ToothIcon}
           >
             <div className="space-y-4">

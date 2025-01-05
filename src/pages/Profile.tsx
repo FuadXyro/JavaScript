@@ -58,13 +58,13 @@ export default function Profile() {
   
   const [profileData, setProfileData] = useState<ProfileData>({
     personal: {
-      name: 'Kens Ransyah',
+      name: 'Fuad Xyro',
       title: 'Software Engineer',
-      email: 'contact@slightnich.my.id',
-      phone: '+62 888-8375-863',
+      email: 'lyncxteam@gmail.com',
+      phone: '+62 819-9911-5614',
       location: 'Jawa Tengah, Indonesia',
       bio: 'Passionate software engineer with 8+ years of experience in full-stack development. Love building scalable applications and mentoring junior developers.',
-      website: 'https://nexon.my.id',
+      website: 'https://api.zenkey.my.id',
       joinDate: 'January 2025',
       avatar: '/images/default-avatar.svg',
       coverPhoto: '/images/default-cover.svg',

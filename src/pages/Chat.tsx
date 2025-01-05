@@ -107,7 +107,7 @@ export default function Chat() {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'This is a simulated AI response. The actual AI integration will be implemented later.',
+        content: 'Sabar kocak, ini masih dalam percobaan, dan masih belum ada answer. trimakasih!!',
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, aiMessage]);
@@ -139,7 +139,7 @@ export default function Chat() {
               </Link>
               <div className="flex items-center space-x-3">
                 <div className="h-3 w-3 bg-green-500 rounded-full animate-pulse" />
-                <h1 className="text-xl font-bold text-white">NEXON AI Chat</h1>
+                <h1 className="text-xl font-bold text-white">ZENITH - CHAT</h1>
               </div>
             </div>
 
@@ -150,7 +150,7 @@ export default function Chat() {
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
               >
                 <SparklesIcon className="h-5 w-5 mr-2" />
-                NEXON Generation
+                ZENITH - GENERATION
               </Link>
             </div>
           </div>
@@ -214,7 +214,7 @@ export default function Chat() {
                   handleSubmit(e);
                 }
               }}
-              placeholder="Type your message... (Press Enter to send, Shift + Enter for new line)"
+              placeholder="Tulis pertanyaan!!"
               className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:border-blue-500 resize-none min-h-[2.5rem] max-h-32 overflow-y-auto custom-scrollbar-dark"
               rows={1}
             />

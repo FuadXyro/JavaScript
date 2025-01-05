@@ -127,7 +127,7 @@ export default function Landing() {
               </div>
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-blue-400 to-purple-600 text-transparent bg-clip-text pb-2">
-              Experience the Future with NEXON AI
+              Experience the Future with ZENITH - AI
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Unlock the power of artificial intelligence with our cutting-edge
@@ -199,11 +199,11 @@ export default function Landing() {
         </div>
       </div>
 
-      {/* Why Choose NEXON AI Section */}
+      {/* Why Choose ZENITH - AI Section */}
       <div className="py-24 bg-gradient-to-b from-gray-900 to-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Why choose NEXON AI?</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Why choose ZENITH - AI?</h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Experience the future of AI-powered development with features designed to enhance your workflow
             </p>
