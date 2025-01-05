@@ -6,9 +6,6 @@ import {
   ArrowLeftIcon,
   SparklesIcon,
   PaperAirplaneIcon,
-  ThumbUpIcon,
-  ThumbDownIcon,
-  ClipboardIcon,
 } from '@heroicons/react/24/outline';
 
 interface Message {
@@ -25,6 +22,18 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // Fungsi untuk membuat ID unik
+  const getRandomId = () => {
+    return `user-${Math.random().toString(36).substr(2, 9)}`;
+  };
+
+  // Ambil ID pengguna dari localStorage atau buat ID baru
+  const id = localStorage.getItem('userId') || (() => {
+    const newId = getRandomId();
+    localStorage.setItem('userId', newId);
+    return newId;
+  })();
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -32,6 +41,10 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleCopy = (content: string) => {
+    navigator.clipboard.writeText(content);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +65,7 @@ export default function Chat() {
       const response = await fetch(
         `https://api.zenkey.my.id/api/openai/ai4o?text=${encodeURIComponent(
           input.trim()
-        )}&apikey=zenkey&userId=ZNT-AI-${userMessage.id}`
+        )}&apikey=zenkey&userId=AI-${id}`
       );
       const result = await response.json();
 
@@ -76,10 +89,6 @@ export default function Chat() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleCopy = (content: string) => {
-    navigator.clipboard.writeText(content);
   };
 
   const formatTime = (date: Date) => {
@@ -111,7 +120,7 @@ export default function Chat() {
               className="inline-flex items-center px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-md"
             >
               <SparklesIcon className="h-5 w-5 mr-2" />
-              ZENITH - GENERATION
+              Generation
             </Link>
           </div>
         </div>
@@ -141,7 +150,7 @@ export default function Chat() {
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-xs opacity-75">
-                      {message.role === 'user' ? 'I\'am' : 'Ai Assistant'}
+                      {message.role === 'user' ? 'I\'am' : 'Ai Assistent'}
                     </span>
                     <span className="text-xs opacity-75">
                       {formatTime(message.timestamp)}
@@ -151,20 +160,12 @@ export default function Chat() {
                     {message.content}
                   </p>
                   {message.role === 'assistant' && (
-                    <div className="flex gap-2 mt-2">
-                      <button
-                        onClick={() => handleCopy(message.content)}
-                        className="flex items-center p-2 rounded-full text-blue-500 hover:bg-gray-700 hover:text-blue-700"
-                      >
-                        <ClipboardIcon className="h-5 w-5" />
-                      </button>
-                      <button className="flex items-center p-2 rounded-full text-green-500 hover:bg-gray-700 hover:text-green-700">
-                        <ThumbUpIcon className="h-5 w-5" />
-                      </button>
-                      <button className="flex items-center p-2 rounded-full text-red-500 hover:bg-gray-700 hover:text-red-700">
-                        <ThumbDownIcon className="h-5 w-5" />
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => handleCopy(message.content)}
+                      className="mt-2 text-xs text-blue-400 hover:underline"
+                    >
+                      Salin
+                    </button>
                   )}
                 </div>
               </div>
