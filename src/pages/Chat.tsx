@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLoading } from '../context/LoadingContext';
 import {
@@ -22,6 +22,8 @@ export default function Chat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  const id = '12345'; // Ganti dengan logika ID dinamis jika diperlukan
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -29,6 +31,12 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleCopy = (content: string) => {
+    navigator.clipboard.writeText(content).then(() => {
+      alert('Pesan berhasil disalin ke clipboard!');
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +57,7 @@ export default function Chat() {
       const response = await fetch(
         `https://api.zenkey.my.id/api/openai/ai4o?text=${encodeURIComponent(
           input.trim()
-        )}&apikey=zenkey&userId=user-id`
+        )}&apikey=zenkey&userId=AI-${id}`
       );
       const result = await response.json();
 
@@ -134,7 +142,7 @@ export default function Chat() {
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-xs opacity-75">
-                      {message.role === 'user' ? 'Kamu' : 'Asisten AI'}
+                      {message.role === 'user' ? 'I\'am' : 'Ai Assistent'}
                     </span>
                     <span className="text-xs opacity-75">
                       {formatTime(message.timestamp)}
@@ -143,6 +151,12 @@ export default function Chat() {
                   <p className="text-sm md:text-base whitespace-pre-wrap">
                     {message.content}
                   </p>
+                  <button
+                    onClick={() => handleCopy(message.content)}
+                    className="mt-2 text-xs text-blue-400 hover:underline"
+                  >
+                    Salin
+                  </button>
                 </div>
               </div>
             </div>
