@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { useLoading } from '../context/LoadingContext';
 import {
   PhotoIcon,
-  ArrowPathIcon,
-  SparklesIcon,
   ArrowLeftIcon,
+  SparklesIcon,
   PaperAirplaneIcon,
 } from '@heroicons/react/24/outline';
 
@@ -22,7 +21,6 @@ export default function Chat() {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const resizeTimeoutRef = useRef<NodeJS.Timeout>();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -31,61 +29,6 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  // Improved auto-resize textarea with debounce
-  const adjustTextareaHeight = useCallback(() => {
-    if (inputRef.current) {
-      // Clear the previous timeout
-      if (resizeTimeoutRef.current) {
-        clearTimeout(resizeTimeoutRef.current);
-      }
-
-      // Set a new timeout
-      resizeTimeoutRef.current = setTimeout(() => {
-        const textarea = inputRef.current;
-        if (textarea) {
-          // Reset height to auto to get the correct scrollHeight
-          textarea.style.height = 'auto';
-          
-          // Calculate new height
-          const newHeight = Math.min(textarea.scrollHeight, 200); // Max height of 200px
-          
-          // Set the new height
-          textarea.style.height = `${newHeight}px`;
-        }
-      }, 10);
-    }
-  }, []);
-
-  // Clean up timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (resizeTimeoutRef.current) {
-        clearTimeout(resizeTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    adjustTextareaHeight();
-  }, [input, adjustTextareaHeight]);
-
-  useEffect(() => {
-    const loadMessages = async () => {
-      setLoading(true);
-      try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        // Your actual API call here
-      } catch (error) {
-        console.error('Error loading messages:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadMessages();
-  }, [setLoading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,38 +41,52 @@ export default function Chat() {
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
-
-    // Simulate AI response
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      const response = await fetch(
+        `https://api.zenkey.my.id/api/openai/ai4o?text=${encodeURIComponent(
+          input.trim()
+        )}&apikey=zenkey&userId=user-id`
+      );
+      const result = await response.json();
+
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'Sabar kocak, ini masih dalam percobaan, dan masih belum ada answer. trimakasih!!',
+        content: result.result || 'Maaf, ada masalah dalam memproses permintaan.',
         timestamp: new Date(),
       };
-      setMessages(prev => [...prev, aiMessage]);
+
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      console.error('Error fetching AI response:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 2).toString(),
+        role: 'assistant',
+        content: 'Maaf, terjadi kesalahan saat menghubungi server.',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', {
-      hour: 'numeric',
+    return date.toLocaleTimeString('id-ID', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true,
     });
   };
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)] mt-16 bg-gray-900">
-      {/* Navigation Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left side */}
             <div className="flex items-center space-x-4">
               <Link
                 to="/"
@@ -142,28 +99,22 @@ export default function Chat() {
                 <h1 className="text-xl font-bold text-white">ZENITH - CHAT</h1>
               </div>
             </div>
-
-            {/* Right side */}
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/generation"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-              >
-                <SparklesIcon className="h-5 w-5 mr-2" />
-                ZENITH - GENERATION
-              </Link>
-            </div>
+            <Link
+              to="/generation"
+              className="inline-flex items-center px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-md"
+            >
+              <SparklesIcon className="h-5 w-5 mr-2" />
+              ZENITH - GENERATION
+            </Link>
           </div>
         </div>
       </div>
-
-      {/* Chat Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <PhotoIcon className="h-12 w-12 mb-4" />
-            <p className="text-lg font-medium">No messages yet</p>
-            <p className="text-sm">Start a conversation with the AI assistant</p>
+            <p className="text-lg font-medium">Belum ada pesan</p>
+            <p className="text-sm">Mulai percakapan dengan asisten AI</p>
           </div>
         ) : (
           messages.map((message) => (
@@ -183,7 +134,7 @@ export default function Chat() {
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between gap-4">
                     <span className="text-xs opacity-75">
-                      {message.role === 'user' ? 'You' : 'AI Assistant'}
+                      {message.role === 'user' ? 'Kamu' : 'Asisten AI'}
                     </span>
                     <span className="text-xs opacity-75">
                       {formatTime(message.timestamp)}
@@ -199,31 +150,21 @@ export default function Chat() {
         )}
         <div ref={messagesEndRef} />
       </div>
-
-      {/* Input Form */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-700 bg-gray-800/50 backdrop-blur-sm">
+      <form
+        onSubmit={handleSubmit}
+        className="p-4 border-t border-gray-700 bg-gray-800/50 backdrop-blur-sm"
+      >
         <div className="flex gap-4">
           <div className="flex-1 relative">
             <textarea
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleSubmit(e);
-                }
-              }}
-              placeholder="Tulis pertanyaan!!"
-              className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:border-blue-500 resize-none min-h-[2.5rem] max-h-32 overflow-y-auto custom-scrollbar-dark"
-              rows={1}
+              placeholder="Tulis pesan Anda..."
+              className="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:border-blue-500 resize-none"
             />
             {input.trim() && (
-              <button
-                type="submit"
-                disabled={false}
-                className="absolute right-2 bottom-2 p-2 text-blue-500 hover:text-blue-400 disabled:opacity-50"
-              >
+              <button type="submit" className="absolute right-2 bottom-2 p-2 text-blue-500">
                 <PaperAirplaneIcon className="h-5 w-5" />
               </button>
             )}
