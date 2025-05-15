@@ -82,7 +82,7 @@
         <div id="polls-container" style="width: 100%;"></div>
 
         <div class="hit-counter">
-            <i class="fas fa-hand-point-up"></i> 246 orang baru saja mengetuk tombol ini <i class="fas fa-hand-point-up fa-flip-horizontal"></i>
+            <i class="fas fa-hand-point-up"></i> 286 orang baru saja mengetuk tombol ini <i class="fas fa-hand-point-up fa-flip-horizontal"></i>
         </div>
 
         <a href="/" class="get-own-button">Dapatkan pesan untukmu sendiri!</a>
@@ -110,10 +110,10 @@
             const pollsContainer = document.getElementById('polls-container');
 
             const FRONTEND_LIMIT_KEY = 'nglMsgLimit';
-            const FRONTEND_LIMIT_COUNT = 3;
+            const FRONTEND_LIMIT_COUNT = 10;
             const FRONTEND_LIMIT_WINDOW_MS = 2 * 60 * 60 * 1000;
 
-            const randomPrompts = [ "Apa rahasia terbesarmu?", "Ceritakan lelucon!", "Apa hal paling memalukan?", "Jika punya kekuatan super, apa?", "Pendapat jujurmu tentangku?", "Rekomendasi lagu.", "Mimpi teranehmu?", "Hal bahagia hari ini?", "Satu hal ingin kamu ubah?", "Deskripsikan dirimu 3 kata.", ];
+            const randomPrompts = ["Apa rahasia terbesarmu?", "Ceritakan lelucon!", "Apa hal paling memalukan?", "Jika punya kekuatan super, apa?", "Pendapat jujurmu tentangku?", "Rekomendasi lagu.", "Mimpi teranehmu?", "Hal bahagia hari ini?", "Satu hal ingin kamu ubah?", "Deskripsikan dirimu 3 kata.", "Apa yang kamu takuti?", "Apa keinginan terbesar kamu?", "Apa yang kamu lakukan jika bebas melakukan apa saja?", "Siapa inspirasi hidupmu?", "Apa yang kamu lakukan di hari libur?", "Apa yang kamu sukai dari dirimu?", "Apa yang kamu ubah jika bisa kembali ke masa lalu?", "Apa yang kamu lakukan jika punya banyak uang?", "Apa yang kamu pikir tentang kehidupan?", "Apa yang kamu cari dalam hubungan?", "Jika jadi hewan, kamu jadi hewan apa?", "Makan apa terakhir kali?", "Lagu apa yang selalu kamu nyanyikan?", "Apa yang kamu syukuri hari ini?", "Bagaimana kamu menghadapi stres?", "Apa yang kamu lakukan untuk diri sendiri?", "Jika bisa pergi ke mana saja, kamu pergi ke mana?", "Apa yang kamu buat jika jadi seniman?", "Bagaimana kamu menggambarkan hari ini?", "Apa yang kamu lakukan di waktu luang?", "Film atau buku apa yang kamu sukai?", "Apa yang kamu lakukan jika jadi superhero?"]
 
             function checkAndUpdateFrontendLimit() {
                 let limitData = { count: 0, expires: 0 };
